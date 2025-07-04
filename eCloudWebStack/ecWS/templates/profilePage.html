@@ -1,0 +1,71 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/profilePageStyle.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/dashboardStyle.css' %}" />
+{% endblock %}
+
+{% block dashboardContent %}
+  <div class="profile-header d-flex justify-content-between align-items-center px-4">
+    <h6 class="text-white m-0">MY PROFILE</h6>
+  </div>
+
+  <div class="container">
+    <div class="card shadow profile-card p-4">
+      <div class="text-center">
+        <img src="https://i.pravatar.cc/100" alt="Profile" class="avatar mb-2">
+        <h3>{{ first_name }} {{ last_name }}</h3>
+        <button class="btn btn-outline-secondary btn-sm">Upload Photo</button>
+      </div>
+
+      <!-- Profile Form -->
+      <form method="POST">
+          {% csrf_token %}
+          
+          <!-- First Name -->
+          <div class="mb-3 justify-content-between align-items-center">
+              <label for="first_name" class="form-label">First Name</label>
+              <input id="first_name" name="first_name" type="text" class="form-control" value="{{ first_name }}" readonly>
+          </div>
+          
+          <!-- Last Name -->
+          <div class="mb-3 justify-content-between align-items-center">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input id="last_name" name="last_name" type="text" class="form-control" value="{{ last_name }}" readonly>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3 justify-content-between align-items-center">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" name="email" type="email" class="form-control" value="{{ email }}" readonly>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3 justify-content-between align-items-center">
+              <label for="phone_number" class="form-label">Phone Number</label>
+              <input id="phone_number" name="phone_number" type="text" class="form-control" value="{{ phone_number }}" readonly>
+          </div>
+
+          <!-- Edit button -->
+          <div class="mb-3 d-flex justify-content-between align-items-center">
+              <button id="edit_button" type="button" class="btn btn-primary">Edit</button>
+          </div>
+
+          <!-- Save Changes button (hidden by default) -->
+          <div class="mb-3 d-flex justify-content-between align-items-center">
+              <button id="save_changes" type="submit" class="btn btn-success" style="display: none;">Save Changes</button>
+          </div>
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/profilePage.js' %}"></script> <!-- External JS file -->
+{% endblock %}

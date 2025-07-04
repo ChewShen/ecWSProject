@@ -1,0 +1,41 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% block title %}Mermaid Designer{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/dashboardStyle.css' %}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+{% endblock %}
+
+{% block dashboardContent %}
+<div class="container-fluid py-4">
+  <div class="row g-4">
+
+    <!-- Editor Panel -->
+    <div class="col-md-6">
+      <h4 class="mb-2">💡 Diagram Code (Mermaid)</h4>
+      <textarea id="mermaid-input"
+                class="form-control font-monospace"
+                rows="20"
+                spellcheck="false">{{ diagram_code|safe }}</textarea>
+    </div>
+
+    <!-- Preview Panel -->
+    <div class="col-md-6">
+      <h4 class="mb-2">📊 Preview</h4>
+      <div id="mermaid-preview" class="p-3 border rounded bg-white" style="min-height: 500px; overflow: auto;"></div>
+    </div>
+
+  </div>
+
+    <button id="download-svg" class="btn btn-success mt-3">
+    ⬇️ Download SVG
+    </button>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script type="module" src="{% static 'js/mermaid_designer.js' %}"></script>
+{% endblock %}

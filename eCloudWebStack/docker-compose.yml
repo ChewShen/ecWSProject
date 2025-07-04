@@ -1,0 +1,39 @@
+name: eCloud-WebStack
+
+services:
+  app:
+   env_file:
+   - .env
+   build:
+     context: .
+     dockerfile: dockerfile
+   image: ecws-image
+   container_name: ecws-container
+   ports:
+   - "8000:8000"
+   volumes:
+   - .:/app
+   networks:
+   - mynetwork  # Both services need to be in the same network
+  db:
+   image: postgres:17
+   container_name: postgres-db
+   restart: always
+   environment:
+     POSTGRES_USER: ${DB_USER}
+     POSTGRES_PASSWORD: ${DB_PASSWORD}
+     POSTGRES_DB: ${DB_NAME}
+   volumes:
+    - postgres_data:/var/lib/postgresql/data
+   ports:
+     - "5432:5432"
+   networks:
+     - mynetwork  # Both services need to be in the same network
+
+
+networks:
+  mynetwork:  # Define the custom network
+    driver: bridge
+
+volumes:
+ postgres_data:

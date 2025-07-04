@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_head %}
+  	<link rel="stylesheet" href="{% static 'css/loginPageStyle.css' %}" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+{% endblock %}
+
+{% block navbar_search %}
+	
+{% endblock %}
+
+	{% block content %}
+    <style>
+        body {
+            --background-image: url("{% static 'images/background.png' %}"); /* Set the CSS variable for the background image */
+        }
+    </style>
+    
+    <div class="container-xl bg-info p-4">
+        <h1 class="text-center fw-bold fs-1">Log into your account</h1>
+        <h2 class="text-center fw-normal fs-5 text-dark">Your development journey continues here.</h2>
+
+        {% load socialaccount %}
+            <!-- Email/Password Login Form -->
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="mb-3 col-md-10">
+                    <label for="inputEmail" class="form-label">Username</label>
+                    <input type="username" class="form-control" id="inputEmail" name="username" placeholder="name" required>
+                </div>
+
+                <div class="mb-3 col-md-10">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="password" required>
+                    <div id="passwordHelpBlock" class="form-text">
+                       
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-dark mt-n2" type="submit">Login</button>
+                </div>
+            </form>
+
+            <!-- Divider -->
+            <div class="d-flex align-items-center mt-3">
+                <hr class="flex-grow-1">
+                <span class="mx-2">OR</span>
+                <hr class="flex-grow-1">
+            </div>
+
+            <!-- Google Login Button -->
+            <form method="POST" action="{% provider_login_url 'google' %}">
+                {% csrf_token %}
+                <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                    <button class="btn btn-dark" type="submit">Sign In with Google</button>
+                </div>
+            </form>
+    </div>
+    
+{% endblock %}
+
+
+    {% block scripts %}
+    <script src="{% static 'js/loginPage.js' %}"></script>
+    {% endblock %}
+
+    

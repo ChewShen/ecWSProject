@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+{% block title%}eCloud WebStack System{% endblock %}
+{% load static %}
+
+{% block extra_head %}
+  	<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/dashboardStyle.css' %}" />
+
+{% endblock %}
+
+{% block landingpage %}
+
+{% endblock %}
+
+
+{% block navbar_search %}
+	<button type="button" class="btn btn-primary me-2" onclick="redirectLogin(event)">Login</button>
+	<button type="button" class="btn btn-secondary" onclick="redirectRegister(event)">Register</button>
+{% endblock %}
+
+	{% block content %}
+
+  	<div class="landing-page">
+			
+    		<div class="home">
+      			<div class="container-fluid"  style="background-color: #f8f3f3;"">
+					<div id="carouselExampleIndicators" class="carousel slide">
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+							<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+							<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+						</div>
+
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<div class="container-fluid m-4">
+									<div class="card mb-3 container-lg bg-transparent border-0" >
+										<div class="row g-0 align-items-center">
+											<div class="col-md-7">
+												<div class="card-body custom-font ">
+													<p class="card-text">Your All-in-One Cloud IDE for <span class="fw-bold text-info">Code</span>,<br> 
+														<span class="fw-bold text-info">AI Assistance <br></span>
+														and <span class="fw-bold text-info">Visualization.</span></p><br>
+												</div>
+											</div>
+
+											<div class="col-md-5">
+												<img src="{% static 'media/landing1.jpg' %}" class="img-fluid rounded-start" alt="...">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="carousel-item">
+								<div class="container-fluid m-4">
+									<div class="card mb-3 container-lg bg-transparent border-0" >
+										<div class="row g-0 align-items-center">
+											<div class="col-md-7">
+												<div class="card-body custom-font ">
+													<p class="card-text">Get smart <span class="fw-bold text-info">AI Assistance</span> to improve your code.<br> 
+    												<p class="card-text">Visualize your code with <span class="fw-bold text-info">Real-Time Diagrams</span>.</p>
+												</div>
+											</div>
+
+											<div class="col-md-5">
+												<img src="{% static 'media/test.png' %}" class="img-fluid rounded-start" alt="...">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="carousel-item">
+								<div class="container-fluid m-4">
+									<div class="card mb-3 container-lg bg-transparent border-0" >
+										<div class="row g-0 align-items-center">
+											<div class="col-md-7">
+												<div class="card-body custom-font ">
+												<p class="card-text">Generate <span class="fw-bold text-info">flowcharts</span> & <span class="fw-bold text-info">UMLs</span><br>
+    											<span class="card-text">to understand and refine your code structure.</span></p>
+												</div>
+
+											</div>
+
+											<div class="col-md-5">
+												<img src="{% static 'media/test.png' %}" class="img-fluid rounded-start" alt="...">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<button class="carousel-control-prev fs-2" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							<i class="bi bi-arrow-left-circle"></i>
+							<span class="visually-hidden">Previous</span>
+						</button>
+
+						<button class="carousel-control-next fs-2" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							<i class="bi bi-arrow-right-circle"></i>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+      			</div>
+
+
+				
+      			<div class="community">
+        				<div class="community1">
+          					<div class="section-title">Build, Visualize, and Collaborate – All in One Cloud IDE</div>
+          					<div class="your-ultimate-cloud-based">Who is ecWS suitable for?</div>
+        				</div>
+        				<div class="membership-organizatios-parent">
+          					<div class="membership-organizatios">
+            						<div class="member">
+              							<div class="icon">
+                								
+                								<img class="icon1" style="width: 75px; height:75px;" alt="" src="{% static 'media/student.svg' %}">
+              							</div>
+              							<b class="students-learners">Students & Learners</b>
+            						</div>
+            						<div class="our-cloud-based-ide-offers-ai-wrapper">
+              							<div class="our-cloud-based-ide">Our cloud-based IDE offers AI-powered assistance, real-time collaboration, and interactive code visualization to enhance learning</div>
+            						</div>
+          					</div>
+          					<div class="membership-organizatios">
+            						<div class="member">
+              							<img class="icon" style="width: 75px; height:75px;" alt="" src="{% static 'media/educator.svg' %}">
+              							
+              							<b class="students-learners">Educators & Institutions</b>
+            						</div>
+            						<div class="our-cloud-based-ide-offers-ai-wrapper">
+              							<div class="designed-for-teaching">Designed for teaching and mentoring, ecWS simplifies coding instruction with structured tutorials, debugging tools, and an intuitive interface.</div>
+            						</div>
+          					</div>
+          					<div class="membership-organizatios">
+            						<div class="member">
+              							<img class="icon" style="width: 75px; height:75px;" alt="" src="{% static 'media/developer.svg' %}">
+              							
+              							<b class="developers-teams">Developers & Teams</b>
+            						</div>
+            						<div class="our-cloud-based-ide-offers-ai-wrapper">
+              							<div class="our-cloud-based-ide">Accelerate your workflow with seamless real-time coding, AI-driven debugging, and project collaboration in a unified cloud environment.</div>
+            						</div>
+          					</div>
+        				</div>
+      			</div>
+    		</div>
+
+    		<div class="body">
+      			<div class="unlock">
+        				<div class="unlock1">
+          					<img class="cloud-icon" src="{% static 'media/test.png' %}">
+          					
+          					<div class="frame-parent">
+            						<div class="the-future-of-web-development-parent">
+              							<div class="the-future-of">The Future of Web Development, All ins One damn Cloud IDE.</div>
+              							<div class="when-joining-the-container">
+                								<p class="experience-seamless-coding">Experience seamless coding with real-time collaboration, AI-powered assist, and interactive code visualization.</p>
+                								<p class="experience-seamless-coding">Develop smarter, learn faster, and build better—wherever you are.</p>
+              							</div>
+            						</div>
+            						
+            						<button type="button" class="btn btn-secondary btn-lg">Large button</button>
+          					
+          					</div>
+        				</div>
+      			</div>
+
+      			<div class="flowchart">
+        				<div class="frame-parent">
+          					<div class="the-future-of-web-development-parent">
+            						<div class="the-future-of">Bringing Your Code to Life with Visual Clarity.</div>
+            						<div class="when-joining-the-container">
+              							<p class="experience-seamless-coding">Understand complex code structures effortlessly with dynamic code visualization and AI-powered insights.</p>
+              							<p class="experience-seamless-coding">Make debugging, refactoring, and collaboration simpler and more intuitive than ever</p>
+            						</div>
+          					</div>
+          					<button type="button" class="btn btn-secondary btn-lg">Large button</button>
+        				</div>
+        				<img class="flowchart-icon" alt="" src="{% static 'media/test.png' %}">
+        				
+      			</div>
+      			<div class="customers">
+        				<img class="image-9-icon" alt="" src="{% static 'media/test.png' %}">
+        				
+        				<div class="text-parent">
+          					<div class="text">
+            						<div class="we-have-enjoyed">Maecenas dignissim justo eget nulla rutrum molestie. Maecenas lobortis sem dui, vel rutrum risus tincidunt ullamcorper. Proin eu enim metus. Vivamus sed libero ornare, tristique quam in, gravida enim. Nullam ut molestie arcu, at hendrerit elit. Morbi laoreet elit at ligula molestie, nec molestie mi blandit. Suspendisse cursus tellus sed augue ultrices, quis tristique nulla sodales. Suspendisse eget lorem eu turpis vestibulum pretium. Suspendisse potenti. Quisque malesuada enim sapien, vitae placerat ante feugiat eget. Quisque vulputate odio neque, eget efficitur libero condimentum id. Curabitur id nibh id sem dignissim finibus ac sit amet magna.</div>
+            						<div class="tim-smith-parent">
+              							<div class="tim-smith">Tim Smith</div>
+              							<div class="british-dragon-boat">British Dragon Boat Racing Association</div>
+            						</div>
+          					</div>
+          					<div class="frame-container">
+            						<div class="logo-parent">
+              							<img class="logo-icon" alt="" src="Logo.svg">
+              							
+              							<img class="logo-icon" alt="" src="Logo.svg">
+              							
+              							<img class="logo-icon" alt="" src="Logo.svg">
+              							
+              							<img class="logo-icon" alt="" src="Logo.svg">
+              							
+              							<img class="logo-icon" alt="" src="Logo.svg">
+              							
+              							<img class="logo-icon" alt="" src="Logo.svg">
+              							
+            						</div>
+            						<div class="meet-all-customers-parent">
+              							<div class="meet-all-customers">Meet all customers</div>
+              							<img class="arrows-directionsright" alt="" src="24/Arrows & Directions/Right.png">
+              							
+            						</div>
+          					</div>
+        				</div>
+      			</div>
+      			<div class="community-updates">
+        				<div class="community2">
+          					<div class="the-future-of">Caring is the new marketing</div>
+          					<div class="description1">The Nexcent blog is the best place to read about the latest membership insights, trends and more. See who's joining the community, read about how our community are increasing their membership income and lot's more.​</div>
+        				</div>
+        				<div class="parent">
+          					<div class="div">
+            						<img class="image-18-icon" alt="" src="{% static 'media/test.png' %}">
+            						
+            						<div class="content1">
+              							<div class="creating-streamlined-safeguard">Creating Streamlined Safeguarding Processes with OneRen</div>
+              							<div class="readmore-parent">
+                								<div class="readmore">Readmore</div>
+                								<img class="arrows-directionsright" alt="" src="24/Arrows & Directions/Right.png">
+                								
+              							</div>
+            						</div>
+          					</div>
+          					<div class="div">
+            						<img class="image-18-icon" alt="" src="{% static 'media/test.png' %}">
+            						
+            						<div class="content1">
+              							<div class="creating-streamlined-safeguard">What are your safeguarding responsibilities and how can you manage them?</div>
+              							<div class="readmore-parent">
+                								<div class="readmore">Readmore</div>
+                								<img class="arrows-directionsright" alt="" src="24/Arrows & Directions/Right.png">
+                								
+              							</div>
+            						</div>
+          					</div>
+          					<div class="div">
+            						<img class="image-18-icon" alt="" src="{% static 'media/test.png' %}">
+            						
+            						<div class="content1">
+              							<div class="creating-streamlined-safeguard">Revamping the Membership Model with Triathlon Australia</div>
+              							<div class="readmore-parent">
+                								<div class="readmore">Readmore</div>
+                								<img class="arrows-directionsright" alt="" src="24/Arrows & Directions/Right.png">
+                								
+              							</div>
+            						</div>
+          					</div>
+        				</div>
+      			</div>
+    		</div>
+    		<div class="footer">
+      			<div class="footer-parent">
+        				<div class="footer-sub">What are you waiting for. Get your demo right now</div>
+        				<div class="button3">
+          					<div class="label">Get a Demo</div>
+          					<img class="arrows-directionsright4" alt="" src="16/Arrows & Directions/Right.png">
+          					
+        				</div>
+      			</div>
+      			<div class="footer-big-4">
+        				<div class="company-info">
+          					<div class="logo">
+            						<img class="icon4" alt="" src="Icon.svg">
+            						
+            						<img class="nexcent-icon" alt="" src="Nexcent.svg">
+            						
+          					</div>
+          					<div class="copyright">
+            						<div class="all-rights-reserved">Copyright © 2020 Nexcent ltd.</div>
+            						<div class="all-rights-reserved">All rights reserved</div>
+          					</div>
+          					<div class="social-links">
+            						<img class="social-icons" alt="" src="Social Icons.svg">
+            						
+            						<img class="social-icons" alt="" src="Social Icons.svg">
+            						
+            						<img class="social-icons" alt="" src="Social Icons.svg">
+            						
+            						<img class="social-icons" alt="" src="Social Icons.svg">
+            						
+          					</div>
+        				</div>
+        				<div class="links">
+          					<div class="col-1">
+            						<div class="company">Company</div>
+            						<div class="list-items">
+              							<div class="about-us">About us</div>
+              							<div class="about-us">Blog</div>
+              							<div class="about-us">Contact us</div>
+              							<div class="about-us">Pricing</div>
+              							<div class="about-us">Testimonials</div>
+            						</div>
+          					</div>
+          					<div class="col-1">
+            						<div class="company">Support</div>
+            						<div class="list-items">
+              							<div class="about-us">Help center</div>
+              							<div class="about-us">Terms of service</div>
+              							<div class="about-us">Legal</div>
+              							<div class="about-us">Privacy policy</div>
+              							<div class="about-us">Status</div>
+            						</div>
+          					</div>
+          					<div class="col-1">
+            						<div class="company">Stay up to date</div>
+            						<div class="email-input-field">
+              							<div class="input-field-bg">
+              							</div>
+              							<img class="essential-icons-send" alt="" src="Essential Icons / send.svg">
+              							
+              							<div class="your-email-address">Your email address</div>
+            						</div>
+          					</div>
+        				</div>
+      			</div>
+    		</div>
+
+  	</div>
+  	{% block scripts %}
+    	<script src="{% static 'js/home.js' %}"></script>
+    {% endblock %}
+{% endblock %}
+

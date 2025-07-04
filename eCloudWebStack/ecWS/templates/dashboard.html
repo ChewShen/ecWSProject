@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block extra_head %}
+  	<link rel="stylesheet" href="{% static 'css/dashboardStyle.css' %}" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+{% endblock %}
+
+{% block afterlogin %}
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Home</a>
+</li>
+
+{% endblock %}
+
+{% block navbar_search %}
+<form method="POST" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex" style="height: 100vh;">  <!-- Use 100vh for full viewport height -->
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="bg-dark text-white p-3" style="width: 250px; height: 100%; transition: width 0.3s;">
+    <button class="btn btn-sm btn-light mb-3" onclick="toggleSidebar()">☰</button>
+    <div class="nav flex-column">
+      <a href="#" class="btn btn-purple mb-2 text-start d-flex align-items-center" onclick="openFileSmart()">
+        <i class="bi bi-folder-fill me-2"></i> <span class="sidebar-label">Files</span>
+      </a>
+      <a href="{% url 'mermaid_designer' %}" class="btn btn-purple mb-2 text-start d-flex align-items-center">
+        <i class="bi bi-diagram-3-fill me-2"></i> <span class="sidebar-label">Code Visualize</span>
+      </a>
+      <a href="{% url 'chat_home' %}" class="btn btn-purple mb-2 text-start d-flex align-items-center">
+        <i class="bi bi-chat-left-text-fill me-2"></i> <span class="sidebar-label">Chat Assists</span>
+      </a>
+      <a href="{% url 'profilePage' %}" class="btn btn-purple mb-2 text-start d-flex align-items-center">
+        <i class="bi bi-person-fill me-2"></i> <span class="sidebar-label">Profile</span>
+      </a>
+    </div>
+
+    <!-- Chat Assistant -->
+    <div class="bg-dark text-white p-2 rounded mt-4">
+    <button class="btn btn-sm btn-outline-light w-100 mb-2" onclick="toggleQuickChat()">💬 Quick Chat</button>
+
+    <div id="quick-chat-box" style="display: none;">
+        <div id="quick-chat-messages" class="bg-light text-dark p-2 rounded mb-2" style="height: 400px; overflow-y: auto; font-size: 0.9rem;"></div>
+        
+        <form method="POST" id="quick-chat-form">
+        {% csrf_token %}
+        <input type="text" id="quick-chat-input" class="form-control form-control-sm" placeholder="Ask..." autocomplete="off">
+        <button type="submit" class="btn btn-sm btn-primary">Send</button>
+        </form>
+
+        <!-- Clear Chat Button -->
+        <button id="clear-chat-btn" class="btn btn-sm btn-danger mt-3 w-100">Clear Chat</button>
+    </div>
+    </div>
+
+  </div> <!-- ✅ close sidebar here -->
+
+  <!-- Main content -->
+<div class="flex-grow-1 p-4" style="height: 100%; overflow-y: auto;">
+  {% block dashboardContent %}
+
+  <h1>Welcome Back, {{first_name}} {{last_name}}</h1><br>
+
+  <div class="d-flex  align-items-center gap-2">
+    <h3 class="fw-bold mb-0">Tips</h3>
+    <button class="btn btn-info text-dark btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#tipsCollapse">
+      Toggle
+    </button>
+  </div>
+
+  <div class="collapse show" id="tipsCollapse">
+    <div class="container my-5 rounded" style="background-color: #346697;">
+
+      <div id="tipsCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-inner p-1" style="height: 305px;">
+
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div class="d-flex justify-content-center gap-3">
+
+              <div class="card text-center text-white" style="background-color: #55B685; width: 220px;">
+                <div class="card-body">
+                  <p class="card-text fixed-card-text">
+                    Use meaningful variable names, proper indentation, and comments to make your code easier to understand and maintain.
+                  </p>
+                  <hr class="my-3 border-white border-3">
+                  <h6 class="fw-bold mt-3">
+                    Write Clean and Readable Code
+                  </h6>
+                </div>
+              </div>
+
+              <div class="card text-center text-white" style="background-color: #5AAE6B; width: 220px;">
+                <div class="card-body">
+                  <p class="card-text fixed-card-text">
+                    👀 Use dependency graphs, UML diagrams, or flowcharts to understand code structure and relationships more clearly.
+                  </p>
+                  <hr class="my-3 border-white border-3">
+                  <h6 class="fw-bold mt-3">
+                    Leverage Code Visualization
+                  </h6>
+                </div>
+              </div>
+
+              <div class="card text-center text-white" style="background-color: #438EDB; width: 220px;">
+                <div class="card-body">
+                  <p class="card-text fixed-card-text">
+                    🤖 AI-powered chatbots can help with debugging, syntax suggestions, and documentation, but always verify their recommendations!
+                  </p>
+                  <hr class="my-3 border-white border-3">
+                  <h6 class="fw-bold mt-3">
+                    Use AI Assistance Wisely
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div class="d-flex justify-content-center gap-3">
+
+              <div class="card text-center text-white" style="background-color: #EAA23A; width: 220px;">
+                <div class="card-body">
+                  <p class="card-text fixed-card-text">
+                    👥 Use real-time collaboration features to work with teammates, share knowledge, and improve productivity and coding practices.
+                  </p>
+                  <hr class="my-3 border-white border-3">
+                  <h6 class="fw-bold mt-3">
+                    Collaborate Efficiently
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div> <!-- carousel-inner -->
+
+        <!-- Controls INSIDE carousel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#tipsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#tipsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+
+      </div> <!-- tipsCarousel -->
+
+    </div> <!-- container -->
+  </div> <!-- collapse -->
+
+  {% endblock %}
+</div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+  <!-- Load marked.js library first -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>  <!-- Add this before your custom JS -->
+  <script src="{% static 'js/dashboard.js' %}"></script>  <!-- Your custom JS -->
+{% endblock %}

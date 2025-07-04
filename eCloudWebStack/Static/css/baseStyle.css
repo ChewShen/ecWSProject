@@ -1,0 +1,12 @@
+/* Make sure the alerts stay fixed at the top without pushing content down */
+#message-alerts {
+    position: sticky; /* Keeps the alert fixed on top */
+    top: 56px; /* Adjust this value based on your navbar height */
+    left: 0;
+    width: 100%;
+    z-index: 9999; /* Ensure it's on top of all other content */
+}
+
+.alert {
+    margin: 10px; /* Optional: Adds margin between multiple alerts */
+}

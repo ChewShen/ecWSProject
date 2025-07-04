@@ -1,0 +1,21 @@
+
+.btn-purple {
+    background-color: #7d5fff;
+    color: white;
+    border-radius: 1.5rem;
+}
+
+#sidebar.collapsed {
+    width: 60px !important;
+} 
+
+#sidebar.collapsed .sidebar-label {
+    display: none;
+}
+
+.fixed-card-text {
+  height: 180px;
+  overflow: hidden;
+}
+
+

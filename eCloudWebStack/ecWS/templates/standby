@@ -1,0 +1,121 @@
+<form method="POST">
+            {% load socialaccount %}
+            {% csrf_token %}
+            <div class="row">
+                    <!-- Username input field (50% width on medium screens and above) -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input type="username" name="username "class="form-control" id="inputUsername" placeholder="name">
+                    </div>
+                    
+                    <!-- Email input field (50% width on medium screens and above) -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputEmail" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                    </div>
+                </div>
+
+                <!-- Row for password inputs (side by side) -->
+                <div class="row">
+                    <!-- Password input field -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" name="password1" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock">
+                    <div id="passwordHelpBlock" class="form-text">
+                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </div>
+                    </div>
+
+                    <!-- Confirm Password input field -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" name="password2" id="inputConfirmPassword" class="form-control" aria-describedby="confirmPasswordHelpBlock">
+                        <div id="confirmPasswordHelpBlock" class="form-text">
+                            Please confirm your password.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <div class="sizze fs-6 text-center">By creating an account, you agree to the <span class="text-danger">Terms of Service.</span></div>
+                    <button class="btn btn-primary mt-n2" type="submit">Create account</button>
+                        <div class="d-flex align-items-center">
+                            <hr class="flex-grow-1">
+                            <span class="mx-2">OR</span>
+                            <hr class="flex-grow-1">
+                        </div>
+                </div>
+
+                </form>
+
+
+                  <!-- {{ first_name|default:"Not available" }}<br>
+        {{ last_name|default:"Not available" }}<br>
+        {{ email|default:"Not available" }}
+        {% block dashboardContent %} -->
+
+
+        {% extends 'dashboard.html' %}
+{% load static %}
+{% block title%}Profile{% endblock %}
+
+{% block extra_head %}
+  	<link rel="stylesheet" href="{% static 'css/profilePageStyle.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/dashboardStyle.css' %}" />
+{% endblock %}
+
+
+{% block dashboardContent %}
+  <div class="profile-header d-flex justify-content-between align-items-center px-4">
+    <h6 class="text-white m-0">MY PROFILE</h6>
+    <button class="btn btn-light btn-sm">Edit</button>
+  </div>
+
+   <div class="container">
+    <div class="card shadow profile-card p-4">
+      <div class="text-center">
+        <img src="https://i.pravatar.cc/100" alt="Profile" class="avatar mb-2">
+        <h3>{{first_name}} {{last_name}}</h3>
+        <button class="btn btn-outline-secondary btn-sm">Upload Photo</button>
+      </div>
+
+      <form class="mt-4" method="POST">
+        {% csrf_token %}
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <input type="text" class="form-control" value="{{first_name}} {{last_name}}" readonly>
+          <button class="btn btn-outline-secondary btn-sm ms-2">Edit</button>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <input type="email" class="form-control" value="{{email}}" readonly>
+          <button class="btn btn-outline-secondary btn-sm ms-2">Edit</button>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <input type="text" class="form-control" value="-" readonly>
+          <button class="btn btn-outline-secondary btn-sm ms-2">Edit</button>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <input type="url" class="form-control" value="-" readonly>
+          <button class="btn btn-outline-secondary btn-sm ms-2">Edit</button>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <input type="url" class="form-control" value="-" readonly>
+          <button class="btn btn-outline-secondary btn-sm ms-2">Edit</button>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <button id="save_changes" type="submit" class="btn btn-primary" style="display: none;">Save Changes</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/profilePage.js' %}"></script>
+{% endblock %}

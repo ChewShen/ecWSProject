@@ -1,0 +1,94 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block title %}{{ session.title|default:"Chat" }} - Gemini Chatbot{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/dashboardStyle.css' %}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+{% endblock %}
+
+{% block dashboardContent %}
+<div class="flex h-[91vh] bg-gray-100">
+  <div id="chat-config"
+      data-new-url="{% url 'new_chat' %}"
+      data-rename-url="{% url 'rename_session' 0 %}"
+      data-delete-url="{% url 'delete_session' 0 %}"
+      data-session-url="{% url 'chat_session' 0 %}"
+      data-csrf="{{ csrf_token }}">
+  </div>
+  <!-- Chat Sidebar -->
+  <aside class="w-64 bg-gray-900 text-white p-4 space-y-4 overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4">💬 Chats</h2>
+
+    <!-- AJAX Button -->
+    <button id="new-chat-btn"
+            class="block w-full bg-blue-600 text-center px-4 py-2 rounded hover:bg-blue-700 text-white">
+      + New Chat
+    </button>
+
+    <!-- Chat Sessions List -->
+    <div id="chat-sessions" class="space-y-2 mt-4">
+      {% for s in sessions %}
+        <div class="flex justify-between items-center group">
+          <a href="{% url 'chat_session' s.id %}"
+             class="block flex-grow px-3 py-2 rounded hover:bg-gray-800 {% if s.id == session.id %}bg-gray-700{% endif %}">
+            <span class="chat-title" data-id="{{ s.id }}">{{ s.title|default:"Untitled Chat" }}</span>
+          </a>
+          <button class="text-sm text-gray-400 group-hover:text-white rename-btn" data-id="{{ s.id }}" title="Rename">
+            ✏️
+          </button>
+          <button class="text-sm text-gray-400 group-hover:text-red-400 delete-btn" data-id="{{ s.id }}" title="Delete">
+            🗑️
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </aside>
+
+  <!-- Main Chat Panel -->
+  <main class="flex-1 flex flex-col p-6 overflow-hidden">
+    <h1 class="text-2xl font-semibold text-blue-600 mb-4">{{ session.title|default:"Untitled Chat" }}</h1>
+
+    <!-- Messages -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 mb-4">
+      {% for m in chat_messages %}
+        <div class="max-w-xl {% if m.role == 'user' %}ml-auto text-right{% else %}mr-auto text-left{% endif %}">
+          <div class="{% if m.role == 'user' %}bg-gray-200{% else %}bg-blue-100{% endif %} p-3 rounded-lg shadow">
+            <div class="prose max-w-full">
+              {{ m.rendered|safe }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Message Form -->
+    <form method="POST" class="mt-4 flex space-x-2">
+      {% csrf_token %}
+      <input type="text" name="prompt" placeholder="Type your message..." autocomplete="off"
+            class="flex-grow p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Send
+      </button>
+    </form>
+
+{% if mermaid_code %}
+  <div class="mt-4">
+    <a href="{% url 'mermaid_designer' %}?code={{ mermaid_code|urlencode }}"
+       target="_blank"
+       class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+      👉 View Diagram in Designer
+    </a>
+  </div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+ {{ block.super }}
+<script src="{% static 'js/chatbot.js' %}"></script>
+{% endblock %}
+

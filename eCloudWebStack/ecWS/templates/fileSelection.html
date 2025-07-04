@@ -1,0 +1,22 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block title %}File Selection{% endblock %}
+
+{% block extra_head %}
+  	<link rel="stylesheet" href="{% static 'css/dashboardStyle.css' %}" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+{% endblock %}
+
+{% block dashboardContent %}
+    <!-- Main content -->
+    <div class="flex-grow-1 p-4">
+        <div id="root"></div> <!-- React will mount into this div -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <!-- Include your React build file -->
+    <script src="{% static 'js/index-DT5VMcAi.js' %}"></script>
+{% endblock %}

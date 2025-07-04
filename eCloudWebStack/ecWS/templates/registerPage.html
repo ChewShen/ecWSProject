@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_head %}
+  	<link rel="stylesheet" href="{% static 'css/registerPageStyle.css' %}" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+{% endblock %}
+
+{% block navbar_search %}
+	
+{% endblock %}
+
+	{% block content %}
+     <style>
+        body {
+            --background-image: url("{% static 'images/background.png' %}"); /* Set the CSS variable for the background image */
+        }
+    </style>
+    
+    <div class="container-xl bg-info p-4">
+        <h1 class="text-center fw-bold fs-1">Create an account</h1>
+        <h2 class="text-center fw-normal fs-5 text-dark">Get started with ecWS – it's free and easy!</h2>
+
+        <form method="POST">
+            {% load socialaccount %}
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="row">
+                    <!-- Username input field (50% width on medium screens and above) -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                    </div>
+                    
+                    <!-- Email input field (50% width on medium screens and above) -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputEmail" class="form-label">Email address</label>
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Row for password inputs (side by side) -->
+                <div class="row">
+                    <!-- Password input field -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    {{ form.password1 }}
+                    {% for error in form.password1.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                    <div id="passwordHelpBlock" class="form-text">
+                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </div>
+                    </div>
+
+                    <!-- Confirm Password input field -->
+                    <div class="mb-3 col-md-6">
+                    <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
+                    {{ form.password2 }}
+                    {% for error in form.password2.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                        <div id="confirmPasswordHelpBlock" class="form-text">
+                            Please confirm your password.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <div class="sizze fs-6 text-center">By creating an account, you agree to the <span class="text-danger">Terms of Service.</span></div>
+                    <button class="btn btn-primary mt-n2" type="submit">Create account</button>
+                        <div class="d-flex align-items-center">
+                            <hr class="flex-grow-1">
+                            <span class="mx-2">OR</span>
+                            <hr class="flex-grow-1">
+                        </div>
+                </div>
+
+                </form>
+
+            <form method="POST" action="{% provider_login_url 'google' %}">
+                {% csrf_token %}
+                <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                    <button class="btn btn-dark " type="submit">Sign Up with Google</button>
+                </div>
+            </form>
+            
+                
+
+    </div>
+
+    {% block scripts %}
+    <script src="{% static 'js/registerPage.js' %}"></script>
+    {% endblock %}
+
+    {% endblock %}
+
+
+    
