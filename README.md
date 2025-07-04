@@ -1,3 +1,4 @@
+![image](https://github.com/user-attachments/assets/1d9ad66b-d4f7-457c-83ae-0b1bc4714de9)
 This is part of my FYP project, havent finish it yet
 
 The implementation for the project can be seperate into a few parts.
@@ -17,10 +18,14 @@ The implementation for the project can be seperate into a few parts.
 - **Login w/ google**
   -----------
 1. Successful connect and able to access for login and register using google.
+   ![image](https://github.com/user-attachments/assets/e4d18da8-7cbd-4baf-9017-994e183da3eb)
+
    
 - **Gemini API**
    -----------
 1. Gemini can be work as Chatbot and Syntax Generator for Mermaid.js
+   ![image](https://github.com/user-attachments/assets/ea93b5cb-f725-4bed-baa8-66c226023830)
+
      
 - **RASA (NLU)**
   -----------
@@ -29,6 +34,8 @@ The implementation for the project can be seperate into a few parts.
 - **Mermaid.js/ Draw.io API**
   -----------
 1. Able to work with Ver 11
+   ![image](https://github.com/user-attachments/assets/8066ea11-b775-4ee8-bdf8-cc0b9639560f)
+
    
 - **Monaco Editor alongside with React (Vite)**
   -----------
