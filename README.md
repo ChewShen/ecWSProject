@@ -50,3 +50,26 @@ The implementation for the project can be seperate into a few parts.
 3. Collaboration 
 
 
+**How To Run**
+  -----------
+1. Use Docker and Migrate the data before running
+2. Environment Variables
+
+Create a `.env` file in your project root and add the following variables:
+
+| Variable            | Example Value                                        | Notes                                                          |
+|----------------------|-----------------------------------------------------|----------------------------------------------------------------|
+| `SECRET_KEY`         | django-insecure-_+!2%g5+6_dbzvc!w5^&jzhrjk*m1+7&#v5#\$eng4rw_s&a\$fs | You can keep this, or change it for security. |
+| `DB_NAME`            |                                                    | Your database name. (e.g My_Database)                           |
+| `DB_USER`            |                                                   | Your database user.   (e.g My_User)                              |
+| `DB_PASSWORD`        |                                                   | Your database password.   (e.g My_Password)                      |      
+| `GOOGLE_CLIENT_ID`   |                                                   | Your Google OAuth client ID.                                     |
+| `GOOGLE_SECRET`      |                                                   | Your Google OAuth secret.                                        |
+| `GOOGLE_API_KEY`     |                                                    | Your Google API key.                                            |      
+
+3. run Docker compose --build
+4. docker compose run app python manage.py migrate
+
+
+
+
